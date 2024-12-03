@@ -1,17 +1,16 @@
 package main
 
 import (
-	"bufio"
+	"commons/reader"
 	"day01/calculator"
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	lines, err := readLines("../assets/input.txt")
+	lines, err := reader.ReadLines("../assets/input.txt")
 	if err != nil {
 		log.Fatalf("readLines: %s", err)
 	}
@@ -20,21 +19,6 @@ func main() {
 	fmt.Printf("total distance between points: %v\n", distance)
 	similiarity := calculator.CalculateSimiliarity(leftArray[:], rightArray[:])
 	fmt.Printf("total similiarity of arrays: %v\n", similiarity)
-}
-
-func readLines(path string) ([]string, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines, scanner.Err()
 }
 
 func sortLinesInArrays(lines []string) ([1000]int, [1000]int) {
